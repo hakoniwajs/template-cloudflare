@@ -5,9 +5,14 @@
   // 依存の wrangler (workerd) バージョンに合わせて更新する
   "compatibility_date": "2026-08-22",
   "compatibility_flags": ["nodejs_compat"],
-  // Workers Cache。応答の Cache-Control に従って Cloudflare 側が自動でキャッシュする
+  // Workers Cache。Gateway (default) はキャッシュせず毎回実行し、内側の CachedPages が
+  // ページや OGP 画像をキャッシュする (props でセッションごとに分ける)
   "cache": {
     "enabled": true
+  },
+  "exports": {
+    "default": { "type": "worker", "cache": { "enabled": false } },
+    "CachedPages": { "type": "worker", "cache": { "enabled": true } }
   },
   // @hakoniwajs/core に同梱される静的アセット (images/style.css 等) を配信する
   "assets": {
@@ -17,10 +22,6 @@
   "durable_objects": {
     "bindings": [{ "name": "GAME", "class_name": "HakoniwaGame" }]
   },
-  // 未ログイン GET のトップ/観光ページをキャッシュする KV 名前空間 (省略可)。
-  // 使うには `wrangler kv namespace create SNAPSHOT` で作成し、返ってきた id を
-  // `"id": "..."` として追加する。id が無いと実際のデプロイには失敗する。
-  // "kv_namespaces": [{ "binding": "SNAPSHOT", "id": "<ここに id>" }],
   "migrations": [{ "tag": "v1", "new_sqlite_classes": ["HakoniwaGame"] }],
   // ターン進行の外部トリガー。15 分ごとに DO の checkTurn() (RPC) を呼ぶ
   "triggers": {

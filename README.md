@@ -27,7 +27,7 @@ $ npx wrangler deploy  # デプロイ
 - サイト名・フッタ・タイムゾーン・NG ワードなどは、管理画面 (`/admin`) の「サイト設定」で変更します。
 - X / Discord ログインや Resend などの秘密情報は `wrangler secret put <NAME>` (またはダッシュボードの Settings → Variables and Secrets) で登録します。ローカル開発では `.dev.vars.example` を `.dev.vars` にコピーし、必要な行のコメントを外して使います。
 - 設定項目の一覧はドキュメントの [環境変数一覧](https://hakoniwajs.github.io/hakoniwa/setup/environment-variables/) を参照してください。
-- トップページ等を Workers KV にキャッシュする場合は `wrangler kv namespace create SNAPSHOT` で名前空間を作り、`wrangler.jsonc` の `kv_namespaces` を有効化してください (任意)。
+- ページや OGP 画像は Workers Cache でキャッシュされます (追加の設定は不要です)。
 
 ## License
 
