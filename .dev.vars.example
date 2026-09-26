@@ -1,0 +1,14 @@
+# ローカル開発用の秘密情報。`.dev.vars` にコピーして使う (.dev.vars はコミットしない)。
+# 本番は `wrangler secret put <NAME>` で登録する。
+
+# セッション署名などに使う秘密鍵。`openssl rand -base64 32` などで生成する (必須)
+HAKONIWA_AUTH_SECRET=
+
+# 外部 OAuth でログインさせる場合 (任意)
+HAKONIWA_X_CLIENT_ID=
+HAKONIWA_X_CLIENT_SECRET=
+HAKONIWA_DISCORD_CLIENT_ID=
+HAKONIWA_DISCORD_CLIENT_SECRET=
+
+# メール送信 (パスワードレスログインのメールリンク) に Resend を使う場合 (任意)
+HAKONIWA_RESEND_API_KEY=

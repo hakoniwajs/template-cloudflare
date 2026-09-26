@@ -1,0 +1,55 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "hakoniwa",
+  "main": "src/worker.ts",
+  // 依存の wrangler (workerd) バージョンに合わせて更新する
+  "compatibility_date": "2026-08-22",
+  "compatibility_flags": ["nodejs_compat"],
+  // Workers Cache。応答の Cache-Control に従って Cloudflare 側が自動でキャッシュする
+  "cache": {
+    "enabled": true
+  },
+  // @hakoniwajs/core に同梱される静的アセット (images/style.css 等) を配信する
+  "assets": {
+    "directory": "./node_modules/@hakoniwajs/core/public"
+  },
+  // 世界 = 1 DO (SQLite backend)
+  "durable_objects": {
+    "bindings": [{ "name": "GAME", "class_name": "HakoniwaGame" }]
+  },
+  // 未ログイン GET のトップ/観光ページをキャッシュする KV 名前空間 (省略可)。
+  // 使うには `wrangler kv namespace create SNAPSHOT` で作成し、返ってきた id を
+  // `"id": "..."` として追加する。id が無いと実際のデプロイには失敗する。
+  // "kv_namespaces": [{ "binding": "SNAPSHOT", "id": "<ここに id>" }],
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["HakoniwaGame"] }],
+  // ターン進行の外部トリガー。15 分ごとに DO の checkTurn() (RPC) を呼ぶ
+  "triggers": {
+    "crons": ["*/15 * * * *"]
+  },
+  // 非秘密の設定値。秘密情報は `wrangler secret put <NAME>` で登録する:
+  //   wrangler secret put HAKONIWA_AUTH_SECRET
+  //   wrangler secret put HAKONIWA_X_CLIENT_ID
+  //   wrangler secret put HAKONIWA_X_CLIENT_SECRET
+  //   wrangler secret put HAKONIWA_DISCORD_CLIENT_ID
+  //   wrangler secret put HAKONIWA_DISCORD_CLIENT_SECRET
+  //   wrangler secret put HAKONIWA_RESEND_API_KEY
+  "vars": {
+    // 新しいデータを作るときの1ターンの長さ (秒) の既定値。
+    "HAKONIWA_UNIT_TIME_SEC": "21600",
+    "HAKONIWA_MAX_CATCH_UP_TURNS": "3",
+    "HAKONIWA_ADMIN_EMAILS": "",
+    "HAKONIWA_MAIL_FROM": "hakoniwa@example.com",
+    "HAKONIWA_DEV_LOGIN": "false",
+    // 開始時刻と最終ターン (シーズン)。空文字列なら「現在時刻を切り下げ」「無期限」が既定。
+    "HAKONIWA_START_AT": "",
+    "HAKONIWA_FINAL_TURN": "",
+    "HAKONIWA_TIMEZONE": "Asia/Tokyo",
+    "HAKONIWA_SITE_TITLE": "箱庭諸島２",
+    "HAKONIWA_ADMIN_NAME": "",
+    "HAKONIWA_EMAIL": "",
+    "HAKONIWA_BBS_URL": "",
+    "HAKONIWA_TOPPAGE_URL": "",
+    "HAKONIWA_SNAPSHOT_TTL_SEC": "60",
+    "HAKONIWA_SNAPSHOT_TTL_IMMUTABLE_SEC": "2592000"
+  }
+}

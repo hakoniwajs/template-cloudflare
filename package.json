@@ -1,0 +1,19 @@
+{
+  "name": "hakoniwa-template-cloudflare",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "cf-typegen": "wrangler types"
+  },
+  "dependencies": {
+    "@hakoniwajs/cloudflare": "0.1.0",
+    "@hakoniwajs/core": "0.1.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "5.20260918.1",
+    "typescript": "^5.9.0",
+    "wrangler": "^4.134.0"
+  }
+}
