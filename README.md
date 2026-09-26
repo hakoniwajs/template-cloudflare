@@ -6,13 +6,13 @@
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/hakoniwajs/template-cloudflare)
 
-デプロイ後、必ず `HAKONIWA_AUTH_SECRET` を設定してください:
+デプロイ時に入力する項目はありません。デプロイ後は次の手順で始められます。
 
-```console
-$ npx wrangler secret put HAKONIWA_AUTH_SECRET
-```
+1. 公開 URL の `/login` からメールでログインする (Resend 未設定の間は、ログイン用リンクが Worker のログに出力されます)
+2. `/admin` を開くと初期セットアップ (`/admin/setup`) に移動するので、Worker のログに出力されたセットアップコードを入力して管理者になる
+3. `/admin` の「新しいゲームを開始」でゲームを始める
 
-(`openssl rand -base64 32` などで生成したランダムな文字列)
+詳しくは [ドキュメント](https://hakoniwajs.github.io/hakoniwa/setup/cloudflare/) を参照してください。
 
 ## 手動セットアップ
 
@@ -24,8 +24,9 @@ $ npx wrangler deploy  # デプロイ
 
 ## 設定
 
-- `wrangler.jsonc` の `vars` に非秘密の設定値 (サイト名、ターン長、管理者メールアドレス等) を書きます。設定項目の一覧は本体リポジトリの [設置ガイド](https://github.com/hakoniwajs/hakoniwa/blob/main/docs/setup-guide.md) を参照してください。
-- 秘密情報 (`HAKONIWA_AUTH_SECRET`、OAuth の client secret 等) は `wrangler secret put <NAME>` で登録します。ローカル開発では `.dev.vars.example` を `.dev.vars` にコピーして使います。
+- サイト名・フッタ・タイムゾーン・NG ワードなどは、管理画面 (`/admin`) の「サイト設定」で変更します。
+- X / Discord ログインや Resend などの秘密情報は `wrangler secret put <NAME>` (またはダッシュボードの Settings → Variables and Secrets) で登録します。ローカル開発では `.dev.vars.example` を `.dev.vars` にコピーし、必要な行のコメントを外して使います。
+- 設定項目の一覧はドキュメントの [環境変数一覧](https://hakoniwajs.github.io/hakoniwa/setup/environment-variables/) を参照してください。
 - トップページ等を Workers KV にキャッシュする場合は `wrangler kv namespace create SNAPSHOT` で名前空間を作り、`wrangler.jsonc` の `kv_namespaces` を有効化してください (任意)。
 
 ## License

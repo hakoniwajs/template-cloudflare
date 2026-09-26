@@ -1,14 +1,22 @@
-# ローカル開発用の秘密情報。`.dev.vars` にコピーして使う (.dev.vars はコミットしない)。
-# 本番は `wrangler secret put <NAME>` で登録する。
+# ローカル開発 (`wrangler dev`) 用の秘密情報の例です。`.dev.vars` にコピーし、必要な行のコメントを外して使います
+# (.dev.vars はコミットしない)。
+#
+# Deploy to Cloudflare ボタンは、このファイルの有効な行 (KEY=value) を「デプロイ時に入力が必須の secret」として
+# 扱います。必須の secret は無いので、すべてコメントアウトしています (デプロイ時に何も入力せずに済みます)。
+# 本番で使う場合は、デプロイ後にダッシュボードの Settings → Variables and Secrets か
+# `npx wrangler secret put <NAME>` で登録してください。
 
-# セッション署名などに使う秘密鍵。`openssl rand -base64 32` などで生成する (必須)
-HAKONIWA_AUTH_SECRET=
+# セッション署名などに使う秘密鍵。任意 (未設定なら初回起動時に自動生成して Durable Object に保存します)
+# HAKONIWA_AUTH_SECRET=
 
-# 外部 OAuth でログインさせる場合 (任意)
-HAKONIWA_X_CLIENT_ID=
-HAKONIWA_X_CLIENT_SECRET=
-HAKONIWA_DISCORD_CLIENT_ID=
-HAKONIWA_DISCORD_CLIENT_SECRET=
+# 外部 OAuth でログインさせる場合 (任意。ID と secret の両方が必要)
+# HAKONIWA_X_CLIENT_ID=
+# HAKONIWA_X_CLIENT_SECRET=
+# HAKONIWA_DISCORD_CLIENT_ID=
+# HAKONIWA_DISCORD_CLIENT_SECRET=
 
 # メール送信 (パスワードレスログインのメールリンク) に Resend を使う場合 (任意)
-HAKONIWA_RESEND_API_KEY=
+# HAKONIWA_RESEND_API_KEY=
+
+# ローカル開発で、任意のメールアドレスでログインできる開発ログインを使う場合 (本番では絶対に有効にしない)
+# HAKONIWA_DEV_LOGIN=true
