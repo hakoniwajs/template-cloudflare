@@ -8,8 +8,8 @@
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
-    "@hakoniwajs/cloudflare": "undefined",
-    "@hakoniwajs/core": "undefined"
+    "@hakoniwajs/cloudflare": "0.1.3",
+    "@hakoniwajs/core": "0.1.3"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "5.20260925.1",
