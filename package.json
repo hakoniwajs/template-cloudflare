@@ -8,12 +8,12 @@
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
-    "@hakoniwajs/cloudflare": "0.1.0",
-    "@hakoniwajs/core": "0.1.0"
+    "@hakoniwajs/cloudflare": "0.1.2",
+    "@hakoniwajs/core": "0.1.2"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "5.20260918.1",
-    "typescript": "^5.9.0",
-    "wrangler": "^4.134.0"
+    "@cloudflare/workers-types": "5.20260925.1",
+    "typescript": "^7.0.2",
+    "wrangler": "^4.139.0"
   }
 }
