@@ -28,6 +28,7 @@ $ npx wrangler deploy  # デプロイ
 - X / Discord ログインや Resend などの秘密情報は `wrangler secret put <NAME>` (またはダッシュボードの Settings → Variables and Secrets) で登録します。ローカル開発では `.dev.vars.example` を `.dev.vars` にコピーし、必要な行のコメントを外して使います。
 - 設定項目の一覧はドキュメントの [環境変数一覧](https://hakoniwajs.github.io/hakoniwa/setup/environment-variables/) を参照してください。
 - ページや OGP 画像は Workers Cache でキャッシュされます (追加の設定は不要です)。
+- Workers Cache (`wrangler.jsonc` の `cache.enabled: true`) を有効にすると静的アセットへのリクエストも Workers のリクエストとして課金対象になります。
 
 ## License
 
