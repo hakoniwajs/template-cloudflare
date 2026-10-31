@@ -16,6 +16,8 @@
 
 ## 手動セットアップ
 
+Node.js 22 以上が必要です。Node.js 20 では wrangler が起動しません。
+
 ```console
 $ npm install
 $ npx wrangler dev     # ローカルで動作確認
