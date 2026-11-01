@@ -11,8 +11,8 @@
     "cf-typegen": "wrangler types"
   },
   "dependencies": {
-    "@hakoniwajs/cloudflare": "0.1.6",
-    "@hakoniwajs/core": "0.1.6"
+    "@hakoniwajs/cloudflare": "0.1.7",
+    "@hakoniwajs/core": "0.1.7"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "5.20260925.1",
