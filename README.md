@@ -24,7 +24,7 @@ $ npx wrangler dev     # ローカルで動作確認
 $ npx wrangler deploy  # デプロイ
 ```
 
-一時アカウント (`npx wrangler deploy --temporary`) では cron トリガーの上限が 0 のため、デプロイがエラーコード 10072 で失敗します。一時アカウントで試すときは、デプロイ前に `wrangler.jsonc` の `triggers.crons` を削除してください。通常のアカウントではこの制限はなく、設定をそのままデプロイできます。
+一時アカウント (`npx wrangler deploy --temporary`) では cron トリガーの上限が 0 のため、デプロイがエラーコード 10072 で失敗します。失敗しても Worker 本体はアップロード済みで、更新されないのはトリガー設定だけです (wrangler は "Trigger configuration ... was only partially updated" と表示します)。一時アカウントで試すときは、デプロイ前に `wrangler.jsonc` の `triggers.crons` を削除してください。削除すると 15 分ごとのターン進行は動きません。通常のアカウントではこの制限はなく、設定をそのままデプロイできます。
 
 ## 設定
 
